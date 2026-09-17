@@ -7,10 +7,17 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: git@github.com:mehmetbozyel/homelab.git
-    targetRevision: main
-    path: kubernetes/platform/gitops/argocd
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-cd
+      targetRevision: 10.9.1
+      helm:
+        valueFiles:
+          - $values/kubernetes/platform/gitops/argocd/values.yaml
+
+    - repoURL: git@github.com:mehmetbozyel/homelab.git
+      targetRevision: main
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
@@ -20,3 +27,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - ServerSideApply=true

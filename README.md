@@ -2,7 +2,7 @@ kubectl create namespace argocd
 
 kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d\necho
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 ssh-keygen -t ed25519 -C "argocd-homelab" -f ~/.ssh/argocd-homelab
 cat ~/.ssh/argocd-homelab.pub
