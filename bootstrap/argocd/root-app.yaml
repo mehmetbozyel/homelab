@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/mehmetbozyel/homelab
+    repoURL: https://github.com/mehmetbozyel/homelab.git
     targetRevision: main
     path: clusters/homelab
 
