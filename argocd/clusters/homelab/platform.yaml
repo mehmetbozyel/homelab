@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: root-app
+  name: platform
   namespace: argocd
   
 spec:
@@ -11,7 +11,9 @@ spec:
   source:
     repoURL: git@github.com:mehmetbozyel/homelab.git
     targetRevision: main
-    path: clusters/homelab
+    path: argocd/platform
+    directory:
+      recurse: true
 
   destination:
     server: https://kubernetes.default.svc

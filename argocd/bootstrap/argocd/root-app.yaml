@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 
 metadata:
-  name: workloads
+  name: root-app
   namespace: argocd
   
 spec:
@@ -11,9 +11,7 @@ spec:
   source:
     repoURL: git@github.com:mehmetbozyel/homelab.git
     targetRevision: main
-    path: workloads
-    directory:
-      recurse: true
+    path: argocd/clusters/homelab
 
   destination:
     server: https://kubernetes.default.svc

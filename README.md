@@ -1,46 +1,36 @@
 homelab_v2/
-│
-├── README.md
-│
-├── bootstrap/
-│   └── argocd/
-│       └── root-app.yaml
-│
-├── clusters/
-│   └── homelab/
-│       ├── platform.yaml
-│       └── workloads.yaml
-│
-├── platform/
-│   ├── gitops/
-│   │   └── argocd/
+├── argocd/
+│   ├── bootstrap/
+│   │   └── root-app.yaml
 │   │
-│   ├── networking/
-│   │   ├── traefik/
-│   │   └── cloudflare/
+│   ├── clusters/
+│   │   └── homelab/
+│   │       ├── platform.yaml
+│   │       └── workloads.yaml
 │   │
-│   ├── observability/
-│   │   ├── prometheus/
-│   │   ├── grafana/
-│   │   └── logging/
+│   ├── platform/
+│   │   ├── argocd.yaml
+│   │   ├── monitoring.yaml
+│   │   ├── networking.yaml
+│   │   └── ...
 │   │
-│   ├── storage/
-│   │
-│   └── security/
-│       └── secrets/
+│   └── workloads/
+│       ├── online-boutique.yaml
+│       └── portfolio.yaml
 │
-├── workloads/
-│   ├── online-boutique/
-│   │   ├── application.yaml
-│   │   ├── values.yaml
-│   │   └── README.md
-│   │
-│   └── portfolio/
-│       ├── application.yaml
-│       ├── values.yaml
-│       └── README.md
-│
-└── docs/
-    ├── architecture.md
-    ├── bootstrap.md
-    └── operations.md
+└── kubernetes/
+    ├── platform/
+    │   ├── gitops/
+    │   │   └── argocd/
+    │   ├── networking/
+    │   │   └── traefik/
+    │   ├── observability/
+    │   │   └── monitoring/
+    │   └── storage/
+    │
+    └── workloads/
+        ├── online-boutique/
+        │   ├── manifests/
+        │   └── chart/
+        │
+        └── portfolio/
