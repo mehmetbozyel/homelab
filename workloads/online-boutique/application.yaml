@@ -8,10 +8,17 @@ metadata:
 spec:
   project: default
 
-  source:
-    repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
-    targetRevision: main
-    path: helm-chart
+  sources:
+    - repoURL: https://github.com/GoogleCloudPlatform/microservices-demo.git
+      targetRevision: main
+      path: helm-chart
+      helm:
+          valueFiles:
+            - $values/workloads/online-boutique/values.yaml
+
+    - repoURL: git@github.com:mehmetbozyel/homelab.git
+      targetRevision: main
+      ref: values
 
   destination:
     server: https://kubernetes.default.svc
