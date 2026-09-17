@@ -17,6 +17,11 @@ kubectl create secret docker-registry ghcr-secret \
   --docker-password='<GITHUB_PAT>'
 
 
+kubectl create secret generic tunnel-token \
+  -n cloudflare \
+  --from-literal=token='<CLOUDFLARE_TUNNEL_TOKEN>'
+
+
 homelab_v2/
 ├── argocd/
 │   ├── bootstrap/
