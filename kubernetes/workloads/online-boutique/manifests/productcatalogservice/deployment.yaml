@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: productcatalogservice
-          image: us-central1-docker.pkg.dev/online-boutique-ci/microservices-demo/productcatalogservice:latest
+          image: ghcr.io/mehmetbozyel/online-boutique-productcatalogservice:latest
 
           ports:
             - containerPort: 3550
