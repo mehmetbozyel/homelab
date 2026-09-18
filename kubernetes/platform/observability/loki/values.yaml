@@ -16,5 +16,17 @@ loki:
           prefix: loki_index_
           period: 24h
 
-singleBinary:
+  storage:
+    type: filesystem
+
+  storage_config:
+    filesystem:
+      directory: /var/loki/chunks
+
+monolithic:
   replicas: 1
+
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: local-path
