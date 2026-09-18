@@ -10,6 +10,13 @@ grafana:
   persistence:
     enabled: false
 
+  additionalDataSources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-gateway.monitoring.svc.cluster.local
+        isDefault: false
+
 prometheus:
   enabled: true
 
@@ -23,13 +30,6 @@ prometheus:
       limits:
         cpu: 500m
         memory: 1Gi
-
-  additionalDataSources:
-      - name: Loki
-        type: loki
-        access: proxy
-        url: http://loki-gateway.monitoring.svc.cluster.local
-        isDefault: false
 
 alertmanager:
   enabled: true
