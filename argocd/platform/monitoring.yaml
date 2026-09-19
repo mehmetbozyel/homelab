@@ -20,6 +20,10 @@ spec:
       targetRevision: main
       ref: values
 
+    - repoURL: git@github.com:mehmetbozyel/homelab.git
+      targetRevision: main
+      path: kubernetes/platform/observability/kube-prometheus-stack/dashboards
+
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
