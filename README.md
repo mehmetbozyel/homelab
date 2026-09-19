@@ -78,6 +78,17 @@ argocd repo add git@github.com:mehmetbozyel/homelab.git \
 
 ---
 
+## 2. Create Password for Grafana admin
+
+```bash
+kubectl create secret generic grafana-admin \
+  -n monitoring \
+  --from-literal=admin-user=admin \
+  --from-literal=admin-password='StrongPassword'
+```
+
+---
+
 ## 3. Bootstrap GitOps
 
 The root Argo CD application is applied manually once:
