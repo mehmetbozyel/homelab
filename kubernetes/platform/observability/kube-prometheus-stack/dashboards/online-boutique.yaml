@@ -1,0 +1,158 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: grafana-dashboard-online-boutique
+  namespace: monitoring
+  labels:
+    grafana_dashboard: "1"
+
+data:
+  online-boutique.json: |
+    {
+      "title": "Online Boutique Observability",
+      "uid": "online-boutique",
+      "tags": ["homelab", "online-boutique"],
+      "timezone": "browser",
+      "schemaVersion": 39,
+      "version": 1,
+      "refresh": "30s",
+
+      "panels": [
+        {
+          "id": 1,
+          "title": "Running Pods",
+          "type": "stat",
+          "gridPos": {
+            "h": 4,
+            "w": 6,
+            "x": 0,
+            "y": 0
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "targets": [
+            {
+              "expr": "sum(kube_pod_status_phase{namespace=\"online-boutique\",phase=\"Running\"})",
+              "refId": "A"
+            }
+          ]
+        },
+
+        {
+          "id": 2,
+          "title": "Pod CPU Usage",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 4
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "targets": [
+            {
+              "expr": "sum by (pod) (rate(container_cpu_usage_seconds_total{namespace=\"online-boutique\",container!=\"\",image!=\"\"}[5m]))",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ]
+        },
+
+        {
+          "id": 3,
+          "title": "Pod Memory Usage",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 4
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "targets": [
+            {
+              "expr": "sum by (pod) (container_memory_working_set_bytes{namespace=\"online-boutique\",container!=\"\",image!=\"\"})",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ]
+        },
+
+        {
+          "id": 4,
+          "title": "Container Restarts",
+          "type": "bargauge",
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 12
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "targets": [
+            {
+              "expr": "sum by (pod) (kube_pod_container_status_restarts_total{namespace=\"online-boutique\"})",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ]
+        },
+
+        {
+          "id": 5,
+          "title": "Error Logs",
+          "type": "timeseries",
+          "gridPos": {
+            "h": 7,
+            "w": 16,
+            "x": 8,
+            "y": 12
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "targets": [
+            {
+              "expr": "sum by (pod) (count_over_time({namespace=\"online-boutique\"} |~ \"(?i)error|exception|failed\" [5m]))",
+              "legendFormat": "{{pod}}",
+              "refId": "A"
+            }
+          ]
+        },
+
+        {
+          "id": 6,
+          "title": "Application Logs",
+          "type": "logs",
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 19
+          },
+          "datasource": {
+            "type": "loki",
+            "uid": "loki"
+          },
+          "targets": [
+            {
+              "expr": "{namespace=\"online-boutique\"}",
+              "refId": "A"
+            }
+          ]
+        }
+      ]
+    }
