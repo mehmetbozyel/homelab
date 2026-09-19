@@ -138,7 +138,7 @@ Secret management will probably be moved to a GitOps-friendly solution such as S
 # Repository Structure
 
 ```text
-homelab_v2/
+homelab/
 ├── argocd/
 │   ├── bootstrap/
 │   │   └── root-app.yaml
